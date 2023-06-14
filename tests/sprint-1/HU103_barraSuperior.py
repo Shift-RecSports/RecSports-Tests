@@ -4,12 +4,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
+#chromediver download from selenium-manager
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
 
 import os
 from dotenv import load_dotenv
 load_dotenv()
 
-PATH = os.getenv('PATH')
 PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 
 #HU103
@@ -25,7 +27,7 @@ class BarraSuperiorTest(unittest.TestCase):
 
     
     def setUp(self):
-        self.driver = webdriver.Chrome(PATH)
+        self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     
  
     def test_barraSuperiorUser(self):

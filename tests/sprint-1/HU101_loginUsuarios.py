@@ -8,14 +8,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-
 import os
 from dotenv import load_dotenv
 import time
 
 load_dotenv()
-PATH = os.getenv('PATH')
 PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 
 

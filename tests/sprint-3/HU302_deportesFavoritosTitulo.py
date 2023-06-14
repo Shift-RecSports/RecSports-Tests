@@ -15,16 +15,18 @@ import time
 load_dotenv()
 PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 
-#HU301
-# Ingresar con los datos de tres tipos de 
-# usuario y verificar que puedan acceder a sus componentes
+# HU302
+# Comprobar que el texto “Oferta de deportes” en el componente de deportes 
+# populares dirige al usuario a la página de todos los deportes disponibles hasta el momento. 
 
 class deportesFavoritos(unittest.TestCase):
 
-    USER_PASS = os.getenv('USER_PASS')
+
     USER_LOG = os.getenv('USER_LOG')
+    USER_PASS = os.getenv('USER_PASS')
     USER_NAME = os.getenv('USER_NAME')
 
+    
     def setUp(self):
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     
@@ -34,6 +36,7 @@ class deportesFavoritos(unittest.TestCase):
 
         #Page Loads Correctly
         driver.get(PAGE_ADDRESS + "/login")
+        time.sleep(2)
         self.assertIn("Athletics", driver.title)
 
         #Page Elements 
@@ -50,17 +53,28 @@ class deportesFavoritos(unittest.TestCase):
         passField.send_keys(self.USER_PASS)
 
         loginButton.click()
-
-        #=======================================
-
         time.sleep(2)
-        cardDeportedFavoritos = driver.find_element(By.XPATH, "/html/body/app-root/div/app-home/div/div/div[2]/div[2]")
-        assert cardDeportedFavoritos
 
-        specificDeporte = driver.find_element(By.XPATH, "/html/body/app-root/div/app-home/div/div/div[2]/div[2]/div/div/app-deportes-fav/div/div[1]/div/button/div")
-        specificDeporte.click()
+        #=================================================================
 
+
+        #Search texto “Oferta de deportes” en el componente de deportes populares
+
+        favSportsField = driver.find_element(By.XPATH, "/html/body/app-root/div/app-home/div/div/div[2]/div[2]/div/a/div")
+
+        #Click “Oferta de deportes”
+        favSportsField.click()
+
+        #Load pagina de deportes
         time.sleep(2)
+
+        #Verify loaded page
+
+        deportesPage = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deportes/div/div/div[1]/div[1]")
+
+        assert deportesPage
+        print("🟢 Botón 'Oferta de deportes' es funcional")
+
 
     def tearDown(self):
         self.driver.close()

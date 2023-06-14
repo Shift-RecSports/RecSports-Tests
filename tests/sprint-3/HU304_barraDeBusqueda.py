@@ -15,21 +15,22 @@ import time
 load_dotenv()
 PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 
-#HU301
-# Ingresar con los datos de tres tipos de 
-# usuario y verificar que puedan acceder a sus componentes
+# HU302
+# Verificar que alumno pueda buscar un deporte en una barra de búsqueda.
 
-class deportesFavoritos(unittest.TestCase):
+class barraDeBusqueda(unittest.TestCase):
 
-    USER_PASS = os.getenv('USER_PASS')
+
     USER_LOG = os.getenv('USER_LOG')
+    USER_PASS = os.getenv('USER_PASS')
     USER_NAME = os.getenv('USER_NAME')
 
+    
     def setUp(self):
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     
  
-    def test_deportesFavoritos(self):
+    def test_barraDeBusqueda(self):
         driver = self.driver
 
         #Page Loads Correctly
@@ -50,17 +51,34 @@ class deportesFavoritos(unittest.TestCase):
         passField.send_keys(self.USER_PASS)
 
         loginButton.click()
-
-        #=======================================
-
         time.sleep(2)
-        cardDeportedFavoritos = driver.find_element(By.XPATH, "/html/body/app-root/div/app-home/div/div/div[2]/div[2]")
-        assert cardDeportedFavoritos
 
-        specificDeporte = driver.find_element(By.XPATH, "/html/body/app-root/div/app-home/div/div/div[2]/div[2]/div/div/app-deportes-fav/div/div[1]/div/button/div")
-        specificDeporte.click()
+        
+        #=================================================================
 
+        #Acceso a pagina de deportes
+        driver.get(PAGE_ADDRESS + "/deportes")
         time.sleep(2)
+
+        #Identificar en barra de busqueda
+        barraDeBusqueda = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deportes/div/div/div[1]/div[2]/input")
+        assert barraDeBusqueda
+
+        #Ingreso de texto en barra de busqueda
+        barraDeBusqueda.send_keys("Baloncesto")
+        time.sleep(2)
+
+        #Identificar no haya otra tarjeta adicional a la de baloncesto
+        tarjetaBaloncesto = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deportes/div/div/div[2]/div[1]/div/button")
+        assert tarjetaBaloncesto
+        print("🟢 Barra de búsqueda es funcional")
+
+
+
+
+
+        
+
 
     def tearDown(self):
         self.driver.close()
