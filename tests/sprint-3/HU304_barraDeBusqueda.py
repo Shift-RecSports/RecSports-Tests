@@ -15,13 +15,10 @@ import time
 load_dotenv()
 PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 
-# HU303
-# Como usuario del sistema de tipo “Alumno”, deseo poder ver una lista completa de todos 
-# los deportes disponibles para poder navegar a la página de reservación del espacio. 
+# HU302
+# Verificar que alumno pueda buscar un deporte en una barra de búsqueda.
 
-
-
-class listaDeportes(unittest.TestCase):
+class barraDeBusqueda(unittest.TestCase):
 
 
     USER_LOG = os.getenv('USER_LOG')
@@ -33,7 +30,7 @@ class listaDeportes(unittest.TestCase):
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     
  
-    def test_listaDeportes(self):
+    def test_barraDeBusqueda(self):
         driver = self.driver
 
         #Page Loads Correctly
@@ -63,16 +60,18 @@ class listaDeportes(unittest.TestCase):
         driver.get(PAGE_ADDRESS + "/deportes")
         time.sleep(2)
 
-        #Acceso a deporte seleccionado
-        deporteSeleccionado = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deportes/div/div/div[2]/div[1]")
-        deporteSeleccionado.click()
+        #Identificar en barra de busqueda
+        barraDeBusqueda = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deportes/div/div/div[1]/div[2]/input")
+        assert barraDeBusqueda
+
+        #Ingreso de texto en barra de busqueda
+        barraDeBusqueda.send_keys("Baloncesto")
         time.sleep(2)
 
-        #Comprobar pagina de deporte seleccionado
-        paginaDeporteSeleccionado = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deporte-seleccionado/div/div/div/div[1]/div[2]")
-        assert paginaDeporteSeleccionado
-        print("🟢 Visualización de lista de deportes es funcional")
-
+        #Identificar no haya otra tarjeta adicional a la de baloncesto
+        tarjetaBaloncesto = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deportes/div/div/div[2]/div[1]/div/button")
+        assert tarjetaBaloncesto
+        print("🟢 Barra de búsqueda es funcional")
 
 
 
