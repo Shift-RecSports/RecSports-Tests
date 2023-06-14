@@ -15,13 +15,11 @@ import time
 load_dotenv()
 PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 
-# HU303
-# Como usuario del sistema de tipo “Alumno”, deseo poder ver una lista completa de todos 
-# los deportes disponibles para poder navegar a la página de reservación del espacio. 
+# HU302
+# Comprobar que el texto “Oferta de deportes” en el componente de deportes 
+# populares dirige al usuario a la página de todos los deportes disponibles hasta el momento. 
 
-
-
-class listaDeportes(unittest.TestCase):
+class deportesFavoritos(unittest.TestCase):
 
 
     USER_LOG = os.getenv('USER_LOG')
@@ -33,11 +31,12 @@ class listaDeportes(unittest.TestCase):
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     
  
-    def test_listaDeportes(self):
+    def test_deportesFavoritos(self):
         driver = self.driver
 
         #Page Loads Correctly
         driver.get(PAGE_ADDRESS + "/login")
+        time.sleep(2)
         self.assertIn("Athletics", driver.title)
 
         #Page Elements 
@@ -56,29 +55,25 @@ class listaDeportes(unittest.TestCase):
         loginButton.click()
         time.sleep(2)
 
-        
         #=================================================================
 
-        #Acceso a pagina de deportes
-        driver.get(PAGE_ADDRESS + "/deportes")
+
+        #Search texto “Oferta de deportes” en el componente de deportes populares
+
+        favSportsField = driver.find_element(By.XPATH, "/html/body/app-root/div/app-home/div/div/div[2]/div[2]/div/a/div")
+
+        #Click “Oferta de deportes”
+        favSportsField.click()
+
+        #Load pagina de deportes
         time.sleep(2)
 
-        #Acceso a deporte seleccionado
-        deporteSeleccionado = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deportes/div/div/div[2]/div[1]")
-        deporteSeleccionado.click()
-        time.sleep(2)
+        #Verify loaded page
 
-        #Comprobar pagina de deporte seleccionado
-        paginaDeporteSeleccionado = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deporte-seleccionado/div/div/div/div[1]/div[2]")
-        assert paginaDeporteSeleccionado
-        print("🟢 Visualización de lista de deportes es funcional")
+        deportesPage = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deportes/div/div/div[1]/div[1]")
 
-
-
-
-
-
-        
+        assert deportesPage
+        print("🟢 Botón 'Oferta de deportes' es funcional")
 
 
     def tearDown(self):
