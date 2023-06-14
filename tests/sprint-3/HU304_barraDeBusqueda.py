@@ -15,7 +15,7 @@ import time
 load_dotenv()
 PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 
-# HU302
+# HU304
 # Verificar que alumno pueda buscar un deporte en una barra de búsqueda.
 
 class barraDeBusqueda(unittest.TestCase):

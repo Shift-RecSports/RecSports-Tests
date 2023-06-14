@@ -19,8 +19,6 @@ PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 # Como usuario del sistema de tipo “Alumno”, deseo poder ver una lista completa de todos 
 # los deportes disponibles para poder navegar a la página de reservación del espacio. 
 
-
-
 class listaDeportes(unittest.TestCase):
 
 

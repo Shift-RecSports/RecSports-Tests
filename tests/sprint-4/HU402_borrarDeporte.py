@@ -15,10 +15,11 @@ import time
 load_dotenv()
 PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 
-#HU404
-# Visualizar todas las reservas existentes para un deporte desde la vista del admistiador
+#HU402
+# Borrar un deporte de la lista de deportes y 
+# no se visualice en la página “Deportes” de otro usuario.
 
-class visualizarReservas(unittest.TestCase):
+class borrarDeporte(unittest.TestCase):
 
     ADMIN_LOG = os.getenv('ADMIN_LOG')
     ADMIN_PASS = os.getenv('ADMIN_PASS')
@@ -28,7 +29,7 @@ class visualizarReservas(unittest.TestCase):
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     
  
-    def test_visualizarReservas(self):
+    def test_borrarDeporte(self):
         driver = self.driver
 
         #Page Loads Correctly
@@ -66,7 +67,12 @@ class visualizarReservas(unittest.TestCase):
 
         botonBorrarDeporte = driver.find_element(By.XPATH, "/html/body/app-root/div/app-editar-deporte/div/div/div/form/div/div/div[7]/div/button[1]/span[2]/div")
         botonBorrarDeporte.click()
-        time.sleep(2)
+        time.sleep(1)
+        print("🟢El deporte ha sido borrado correctamente")
+
+        confrimacionBorrar = driver.find_element(By.XPATH, "/html/body/div/div[2]/div/mat-dialog-container/div/div/app-modal-borrar-deporte/div/div[3]/button/span[2]")
+        confrimacionBorrar.click()
+        time.sleep(1)
         print("🟢El deporte ha sido borrado correctamente")
 
 

@@ -16,9 +16,10 @@ load_dotenv()
 PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 
 #HU404
-# Visualizar todas las reservas existentes para un deporte desde la vista del admistiador
+# Agregar un deporte a la lista de deportes y 
+# se visualice en la página “Deportes” de otro usuario.
 
-class visualizarReservas(unittest.TestCase):
+class agregarDeporte(unittest.TestCase):
 
     ADMIN_LOG = os.getenv('ADMIN_LOG')
     ADMIN_PASS = os.getenv('ADMIN_PASS')
@@ -28,7 +29,7 @@ class visualizarReservas(unittest.TestCase):
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     
  
-    def test_visualizarReservas(self):
+    def test_agregarDeporte(self):
         driver = self.driver
 
         #Page Loads Correctly

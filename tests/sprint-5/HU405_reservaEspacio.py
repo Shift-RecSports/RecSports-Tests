@@ -18,7 +18,7 @@ PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 #HU405
 #Separar un bloque de tiempo en un espacio deportivo 
 #y que este se vea bloqueado en el calendario de otro usuario.
-class visualizarReservas(unittest.TestCase):
+class reservaEspacio(unittest.TestCase):
 
     ADMIN_LOG = os.getenv('ADMIN_LOG')
     ADMIN_PASS = os.getenv('ADMIN_PASS')
@@ -115,7 +115,7 @@ class visualizarReservas(unittest.TestCase):
         time.sleep(2)
         reservedField = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deporte-seleccionado/div/div/div/div[3]/div[3]/table/tbody/tr[5]/td[2]/div[3]/div[1]/button/span[2]/div")
         reservedField.click()
-        
+
         time.sleep(2)
         reservator = driver.find_element(By.XPATH, "/html/body/div/div[2]/div/mat-dialog-container/div/div/app-modal-reservacion/div/div[2]/div[5]/span[2]").text
         assert reservator == self.USER_LOG

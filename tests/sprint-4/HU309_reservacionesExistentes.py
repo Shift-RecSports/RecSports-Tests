@@ -19,12 +19,12 @@ PATH = os.getenv('PATH')
 PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 
 
-#HU101
-# Ingresar con los datos de tres tipos de 
-# usuario y verificar que puedan acceder a sus componentes
+#HU309
+# Comprobar visualización de detalles 
+# de reservaciones existentes y requisitos de asistencia.
 
 
-class LoginPageTest(unittest.TestCase):
+class reservacionesExistentes(unittest.TestCase):
 
     USER_LOG = os.getenv('USER_LOG')
     USER_PASS = os.getenv('USER_PASS')
@@ -41,7 +41,7 @@ class LoginPageTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     
-    def test_adminLogin(self):
+    def test_reservacionesExistentes(self):
         driver = self.driver
 
         #Page Loads Correctly

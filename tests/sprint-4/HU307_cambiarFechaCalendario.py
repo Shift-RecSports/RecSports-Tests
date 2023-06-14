@@ -15,10 +15,12 @@ import time
 load_dotenv()
 PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 
-#HU405
-#Separar un bloque de tiempo en un espacio deportivo 
-#y que este se vea bloqueado en el calendario de otro usuario.
-class visualizarReservas(unittest.TestCase):
+#HU307
+#Comprobar accesibilidad y visualización apropiada de 
+# la oferta de espacios deportivos y sus correspondientes 
+# horarios en múltiples días de la semana actual.
+
+class cambiarFecha(unittest.TestCase):
 
     USER_LOG = os.getenv('USER_LOG')
     USER_PASS = os.getenv('USER_PASS')
@@ -29,7 +31,7 @@ class visualizarReservas(unittest.TestCase):
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     
  
-    def test_reservaEspacio(self):
+    def test_cambiarFecha(self):
         driver = self.driver
 
         #================ BEIGN USER LOGIN ====================

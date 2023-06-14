@@ -15,12 +15,10 @@ import time
 load_dotenv()
 PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 
-#HU406
-#Borrar una reservación propia y luego la de un alumno, 
-#revisando que se haya borrado de la base de datos y 
-#no aparezca en el sistema.
-
-class visualizarReservas(unittest.TestCase):
+#HU405
+#Separar un bloque de tiempo en un espacio deportivo 
+#y que este se vea bloqueado en el calendario de otro usuario.
+class borrarReservas(unittest.TestCase):
 
     ADMIN_LOG = os.getenv('ADMIN_LOG')
     ADMIN_PASS = os.getenv('ADMIN_PASS')
@@ -127,7 +125,7 @@ class visualizarReservas(unittest.TestCase):
         #Cancel Reservation for future tests
         cancelReservation = driver.find_element(By.XPATH, "/html/body/div/div[2]/div/mat-dialog-container/div/div/app-modal-reservacion/div/div[3]/button/span[2]")
         cancelReservation.click()
-        print("🟢 The Reservation has been cancelled")
+        print("🟢 Test Reset")
 
 
     def tearDown(self):
