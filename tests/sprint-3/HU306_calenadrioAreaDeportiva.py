@@ -64,7 +64,7 @@ class visualizarReservas(unittest.TestCase):
         #navegar a ultimo dia de semana
         diaDeSemana = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deporte-seleccionado/div/div/div/div[3]/div[2]/div[9]/div/div/button/span[2]")
         diaDeSemana.click()
-        print("🟢 Navegar a ultimo dia de semana")
+        print("🟢 Se muestra el calendario correctamente")
 
 
     def tearDown(self):
