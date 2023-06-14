@@ -53,16 +53,46 @@ class tablaRegistroGimnasio(unittest.TestCase):
         passField.send_keys(self.TRAINER_PASS)
 
         loginButton.click()
+        time.sleep(3)
         #=================================================================
-
+        
+        #do entrada
+        driver.get("https://rec-sports-front.vercel.app/gimnasio/entrada")
         time.sleep(2)
-        #navegar a la pagina de la tabla de registros y verificar que el registro se haya hecho correctamente
-        sideBarButton = driver.find_element(By.XPATH, "/html/body/app-root/app-sidebar/mat-sidenav-container/mat-sidenav/div/mat-nav-list/div[2]/a/span/span/div/mat-icon")
-        sideBarButton.click()
 
-        daySelector = driver.find_element(By.XPATH, "/html/body/app-root/div/app-gimnasio/div/div/div[1]/div/div/mat-form-field/div[1]/div/div[2]/input")
-        daySelector.click()
+        inputField = driver.find_element(By.XPATH, "/html/body/app-root/div/app-registro-entrada/div/div/div[1]/mat-form-field/div[1]/div/div[2]/input")
+        inputField.send_keys("A00824394")
+        inputField.send_keys(Keys.ENTER)
+        time.sleep(0.5)
 
+        #navigate to the table page to find register
+        driver.get("https://rec-sports-front.vercel.app/gimnasio")
+        time.sleep(2)
+
+        tableTopElement = driver.find_element(By.XPATH, "/html/body/app-root/div/app-gimnasio/div/div/div[2]/table/tbody/tr[1]/td[1]").text
+        assert tableTopElement == "A00824394"
+        
+
+
+        #do salida
+        driver.get("https://rec-sports-front.vercel.app/gimnasio/salida")
+        time.sleep(2)
+
+        inputField = driver.find_element(By.XPATH, "/html/body/app-root/div/app-registro-salida/div/div/div/mat-form-field/div[1]/div/div[2]/input")
+        inputField.send_keys("A00824394")
+        inputField.send_keys(Keys.ENTER)
+        time.sleep(0.5)
+
+        #navigate to the table page to find register
+        driver.get("https://rec-sports-front.vercel.app/gimnasio")
+        time.sleep(2)
+
+        tableTopElement = driver.find_element(By.XPATH, "/html/body/app-root/div/app-gimnasio/div/div/div[2]/table/tbody/tr[1]/td[1]").text
+        assert tableTopElement == "A00824394"
+
+        salidaField = driver.find_element(By.XPATH, "/html/body/app-root/div/app-gimnasio/div/div/div[2]/table/tbody/tr[1]/td[4]").text
+        assert salidaField is not None
+        
 
     def tearDown(self):
         self.driver.close()

@@ -65,11 +65,13 @@ class filtroTablaAsistenciaTest(unittest.TestCase):
         daySelector = driver.find_element(By.XPATH, "/html/body/app-root/div/app-gimnasio/div/div/div[1]/div/div/mat-form-field/div[1]/div/div[2]/input")
         daySelector.click()
 
+        time.sleep(1)
         #erase
+        daySelector.send_keys(Keys.RIGHT * len(daySelector.get_attribute("value")))
         daySelector.send_keys(Keys.BACKSPACE * len(daySelector.get_attribute("value")))
 
         time.sleep(2)
-        daySelector.send_keys("5/30/2023")
+        daySelector.send_keys("6/14/2023")
 
         time.sleep(2)
         #table fields check

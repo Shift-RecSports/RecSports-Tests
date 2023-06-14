@@ -48,10 +48,10 @@ class registroSalidaManual(unittest.TestCase):
 
         #Fields Input 
         loginField.click()
-        loginField.send_keys(self.USER_LOG)
+        loginField.send_keys(self.TRAINER_LOG)
 
         passField.click()
-        passField.send_keys(self.USER_PASS)
+        passField.send_keys(self.TRAINER_PASS)
 
         loginButton.click()
         #=================================================================
@@ -61,7 +61,7 @@ class registroSalidaManual(unittest.TestCase):
         sideBarSalida.click()
 
         time.sleep(2)
-        salidaInputField = driver.find_element(By.XPATH, "/html/body/app-root/div/app-registro-entrada/div/div/div[1]/mat-form-field/div[1]/div/div[2]/input")
+        salidaInputField = driver.find_element(By.XPATH, "/html/body/app-root/div/app-registro-salida/div/div/div/mat-form-field/div[1]/div/div[2]/input")
         salidaInputField.send_keys("A00824394")
         salidaInputField.send_keys(Keys.ENTER)
 

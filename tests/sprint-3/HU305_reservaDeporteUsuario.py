@@ -1,6 +1,5 @@
 import unittest
 from selenium import webdriver
-import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.keys import Keys
@@ -11,27 +10,29 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 import os
 from dotenv import load_dotenv
+import time
 
 load_dotenv()
 PAGE_ADDRESS = os.getenv('PAGE_ADDRESS')
 
+#HU405
+#Separar un bloque de tiempo en un espacio deportivo 
+#y que este se vea bloqueado en el calendario de otro usuario.
+class visualizarReservas(unittest.TestCase):
 
-#HU201
-# Verificar que el panel con el aforo actual sea visible 
-# y sea correcto en base a los registros de entrada en el gimnasio
-
-class aforoGimnasioTest(unittest.TestCase):
-
-    USER_PASS = os.getenv('USER_PASS')
     USER_LOG = os.getenv('USER_LOG')
+    USER_PASS = os.getenv('USER_PASS')
     USER_NAME = os.getenv('USER_NAME')
+
 
     def setUp(self):
         self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
     
  
-    def test_barraSuperiorUser(self):
+    def test_reservaEspacio(self):
         driver = self.driver
+
+        #================ BEIGN USER LOGIN ====================
 
         #Page Loads Correctly
         driver.get(PAGE_ADDRESS + "/login")
@@ -52,23 +53,26 @@ class aforoGimnasioTest(unittest.TestCase):
 
         loginButton.click()
 
-        #Login Page Loaded Correctly and the User is Admin
-        try:
-            elem = WebDriverWait(driver, 30).until(
-            EC.presence_of_element_located((By.XPATH, "//*[@id='donut-card']"))
-            )
-        finally:
-            time.sleep(3)
-            aforoActual = driver.find_element(By.XPATH, "//*[@id='donut-card']/div/app-donut-chart/div/div[2]/div[1]").text
+        #================= END USER LOGIN ===================
 
-            print(aforoActual)
-            result_array = str(aforoActual).split('/')
-            aforoActual = int(result_array[0])
-            print(aforoActual)
 
-            assert aforoActual > 0
-            print("🟢 DEBUG: AFORO ACTUAL MAYOR A 0")
+        #Realizar una reserva
+        time.sleep(2)
+        driver.get("https://rec-sports-front.vercel.app/deportes/1d16b6f2-bee6-4fae-a74e-cbffcdf12a19")
+        
+        time.sleep(2)
+        #navegar a ultimo dia de semana
+        diaDeSemana = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deporte-seleccionado/div/div/div/div[3]/div[2]/div[9]/div/div/button/span[2]")
+        diaDeSemana.click()
 
+        time.sleep(2)
+        reservationField = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deporte-seleccionado/div/div/div/div[3]/div[3]/table/tbody/tr[5]/td[2]/div[3]/div/button/span[2]/div")
+        reservationField.click()
+
+        time.sleep(2)
+        confirmationButton = driver.find_element(By.XPATH, "/html/body/div/div[2]/div/mat-dialog-container/div/div/app-modal-reservacion/div/div[3]/button/span[2]")
+        confirmationButton.click()
+        print("🟢 User reservation made")
 
 
 
@@ -79,3 +83,4 @@ class aforoGimnasioTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main() 
+
