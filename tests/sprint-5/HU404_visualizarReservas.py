@@ -65,6 +65,7 @@ class visualizarReservas(unittest.TestCase):
         espacioReservado = driver.find_element(By.XPATH, "/html/body/app-root/div/app-deporte-seleccionado/div/div/div/div[3]/div[3]/table/tbody/tr[5]/td[2]/div[3]/div[2]/button/span[2]/div")
         espacioReservado.click()
 
+        time.sleep(2)
         reservador = driver.find_element(By.XPATH, "/html/body/div/div[2]/div/mat-dialog-container/div/div/app-modal-reservacion/div/div[2]/div[5]/span[2]").text
         assert reservador == "ADMIN"
 
