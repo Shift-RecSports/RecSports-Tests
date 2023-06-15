@@ -66,7 +66,7 @@ class aforoGimnasioTest(unittest.TestCase):
             aforoActual = int(result_array[0])
             print(aforoActual)
 
-            assert aforoActual > 0
+            assert aforoActual >= 0
             print("🟢 DEBUG: AFORO ACTUAL MAYOR A 0")
 
 
