@@ -53,7 +53,7 @@ TRAINER_NAME = " "
    c. cd sprint-[1,2, .. ] <br /> 
    d. python [102, 103...]_nombreDeLaPrueba.py
 
- ## Video de demostración [Sprint 1]:
-
-https://github.com/Shift-RecSports/RecSports-Tests/assets/70775459/0a7c1d11-fd13-4d91-992f-824e599c1fa7
+ ## Video de demostración de fincionamiento de las pruebas:
+ 
+https://drive.google.com/drive/folders/1-VlUA5PG07F213LY0G1oouMiVxF9c8Vm?usp=sharing
 
